@@ -1,0 +1,15 @@
+{
+    "name": "aleksey/jira",
+    "autoload": {
+        "psr-4": {
+            "Aleksey\\Jira\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Aleksey Klimov",
+            "email": "ax.klim@gmail.com"
+        }
+    ],
+    "require": {}
+}
