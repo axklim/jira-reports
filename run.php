@@ -1,6 +1,10 @@
 <?php
 
 // JIRA API Credentials
+$jira_base_url = "https://atlassian.net";
+$jira_email = "test@example.com";
+$jira_api_token = "ATATT3xFfGF0o4Zvwx";
+$epic_key = "TICKET-123";
 
 // JIRA API URL for JQL Search
 $jira_api_url = "$jira_base_url/rest/api/2/search";
