@@ -37,7 +37,8 @@ class JiraClient
                 'json' => $jqlQuery,
             ]);
             
-            return json_decode($response->getBody()->getContents(), true);
+            $response =  json_decode($response->getBody()->getContents(), true);
+            array_map(fn (Issue $issue) => Issue::make($issue), $response['issues']);
         } catch (GuzzleException $e) {
             throw new \RuntimeException("Failed to fetch issues: " . $e->getMessage(), $e->getCode(), $e);
         }
