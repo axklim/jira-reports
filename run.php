@@ -1,50 +1,19 @@
 <?php
 
-// JIRA API Credentials
-$jira_base_url = "https://atlassian.net";
-$jira_email = "test@example.com";
-$jira_api_token = "ATATT3xFfGF0o4Zvwx";
-$epic_key = "TICKET-123";
+require __DIR__ . '/vendor/autoload.php';
 
-// JIRA API URL for JQL Search
-$jira_api_url = "$jira_base_url/rest/api/2/search";
+use Aleksey\Jira\Application;
 
-// JQL query to find all tickets in the given epic
-$jql_query = [
-    "jql" => "'parent' = $epic_key",
-    "startAt" => 0,
-    "maxResults" => 100,
-    "fields" => ["key", "summary", "status", "customfield_10406"],
-];
-
-// cURL request setup
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $jira_api_url);
-curl_setopt($ch, CURLOPT_USERPWD, "$jira_email:$jira_api_token");
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_HTTPHEADER, ["Content-Type: application/json"]);
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($jql_query));
-
-// Execute request
-$response = curl_exec($ch);
-$status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-curl_close($ch);
-
-// Check response status
-if ($status_code == 200) {
-    $tickets = json_decode($response, true);
-    echo "Tickets in Epic $epic_key:\n";
-    print_r($tickets);
-    foreach ($tickets["issues"] as $issue) {
-        echo "- " .
-            $issue["key"] .
-            ": " .
-            $issue["fields"]["summary"] .
-            " (" .
-            $issue["fields"]["status"]["name"] .
-            ")\n";
-    }
+// Load environment variables if a .env file exists
+if (file_exists(__DIR__ . '/.env')) {
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+    $dotenv->load();
 } else {
-    echo "Error fetching tickets. HTTP Status Code: $status_code\n";
+    // For demonstration purposes only - in production use .env file
+    $_ENV['JIRA_BASE_URL'] = 'https://yourdomain.atlassian.net';
+    $_ENV['JIRA_EMAIL'] = 'your-email@example.com';
+    $_ENV['JIRA_API_TOKEN'] = 'your-api-token';
 }
+
+$app = new Application();
+$app->run();

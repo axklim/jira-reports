@@ -2,7 +2,7 @@
     "name": "aleksey/jira",
     "autoload": {
         "psr-4": {
-            "Aleksey\\Jira\\": "src/"
+            "JiraReport\\": "src/"
         }
     },
     "authors": [
