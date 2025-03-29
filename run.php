@@ -8,11 +8,6 @@ use JiraReport\Application;
 if (file_exists(__DIR__ . '/.env')) {
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
     $dotenv->load();
-} else {
-    // For demonstration purposes only - in production use .env file
-    $_ENV['JIRA_BASE_URL'] = 'https://yourdomain.atlassian.net';
-    $_ENV['JIRA_EMAIL'] = 'your-email@example.com';
-    $_ENV['JIRA_API_TOKEN'] = 'your-api-token';
 }
 
 $app = new Application();
