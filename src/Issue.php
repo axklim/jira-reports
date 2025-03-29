@@ -6,9 +6,9 @@ class Issue
 {
     public function __construct(
         public readonly string $key,
-        private readonly string $summary,
-        private readonly string $status,
-        private readonly int $storyPoints,
+        public readonly string $summary,
+        public readonly string $status,
+        public readonly int $storyPoints,
     ) {
     }
 
@@ -18,7 +18,7 @@ class Issue
             $payload['key'],
             $payload['fields']['summary'],
             $payload['fields']['status']['name'],
-            (int) $payload['fields']['customfield_10406'],
+            (int) ($payload['fields']['customfield_10406'] ?? 0),
         );
     }
 }

@@ -23,6 +23,9 @@ class JiraClient
         ]);
     }
 
+    /**
+     * @return Issue[]
+     */
     public function getIssuesInEpic(string $epicKey, int $startAt = 0, int $maxResults = 100): array
     {
         $jqlQuery = [
@@ -37,8 +40,8 @@ class JiraClient
                 'json' => $jqlQuery,
             ]);
             
-            $response =  json_decode($response->getBody()->getContents(), true);
-            array_map(fn (Issue $issue) => Issue::make($issue), $response['issues']);
+            $response = json_decode($response->getBody()->getContents(), true);
+            return array_map(fn ($issue) => Issue::make($issue), $response['issues']);
         } catch (GuzzleException $e) {
             throw new \RuntimeException("Failed to fetch issues: " . $e->getMessage(), $e->getCode(), $e);
         }

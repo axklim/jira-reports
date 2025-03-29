@@ -67,11 +67,11 @@ class Application
             $rows = [];
             $totalPoints = 0;
             
-            foreach ($issues['issues'] as $issue) {
-                $key = $issue['key'];
-                $summary = $issue['fields']['summary'];
-                $status = $issue['fields']['status']['name'];
-                $storyPoints = $issue['fields']['customfield_10406'] ?? 0;
+            foreach ($issues as $issue) {
+                $key = $issue->key;
+                $summary = $issue->summary;
+                $status = $issue->status;
+                $storyPoints = $issue->storyPoints;
                 $totalPoints += $storyPoints;
                 
                 // Color-code status
@@ -103,8 +103,8 @@ class Application
             
             // Status summary
             $statusCounts = [];
-            foreach ($issues['issues'] as $issue) {
-                $status = $issue['fields']['status']['name'];
+            foreach ($issues as $issue) {
+                $status = $issue->status;
                 $statusCounts[$status] = ($statusCounts[$status] ?? 0) + 1;
             }
             
