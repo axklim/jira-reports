@@ -1,6 +1,6 @@
 <?php
 
-namespace Aleksey\Jira;
+namespace JiraReport;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;

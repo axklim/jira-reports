@@ -11,5 +11,10 @@
             "email": "ax.klim@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php-di/php-di": "^7.0",
+        "vlucas/phpdotenv": "^5.6",
+        "guzzlehttp/guzzle": "^7.9",
+        "php": "^8.4"
+    }
 }

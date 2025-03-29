@@ -2,7 +2,7 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use Aleksey\Jira\Application;
+use JiraReport\Application;
 
 // Load environment variables if a .env file exists
 if (file_exists(__DIR__ . '/.env')) {

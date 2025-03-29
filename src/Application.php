@@ -1,6 +1,6 @@
 <?php
 
-namespace Aleksey\Jira;
+namespace JiraReport;
 
 use DI\Container;
 use DI\ContainerBuilder;
