@@ -29,7 +29,7 @@ class JiraClient
     public function getIssuesInEpic(string $epicKey, int $startAt = 0, int $maxResults = 100): array
     {
         $jqlQuery = [
-            'jql' => "'parent' = $epicKey",
+            'jql' => "'parent' = $epicKey and status != Rejected",
             'startAt' => $startAt,
             'maxResults' => $maxResults,
             'fields' => ['key', 'summary', 'status', 'customfield_10406'],

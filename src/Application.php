@@ -98,27 +98,34 @@ class Application
             
             echo $tableRenderer->renderColorTable($headers, $rows, $tableOptions);
             
-            // Calculate total story points and status summary
-            echo "\n\033[1;37mTotal Story Points: \033[1;32m$totalPoints\033[0m\n";
-            
             // Status summary
-            $statusCounts = [];
+            $donePoints = 0;
+            $inProgressPoints = 0;
+            $toDoPoints = 0;
             foreach ($issues as $issue) {
-                $status = $issue->status;
-                $statusCounts[$status] = ($statusCounts[$status] ?? 0) + 1;
+                switch ($issue->status) {
+                    case 'Done':
+                        $donePoints += $issue->storyPoints;
+                        break;
+                    case 'In Progress':
+                        $inProgressPoints += $issue->storyPoints;
+                        break;
+                    case 'To Do':
+                        $toDoPoints += $issue->storyPoints;
+                        break;
+                }
             }
-            
-            echo "\n\033[1;37mStatus Summary:\033[0m\n";
-            foreach ($statusCounts as $status => $count) {
-                $statusColor = match ($status) {
-                    'Done' => "\033[1;32m", // Green
-                    'In Progress' => "\033[1;33m", // Yellow
-                    'To Do' => "\033[1;36m", // Cyan
-                    default => "\033[1;37m", // White
-                };
-                echo "$statusColor$status\033[0m: $count\n";
-            }
-            
+
+            // Summary Report
+            echo "\nTotal Story Points: $totalPoints\n";
+            echo "===============================\n";
+            echo "To Do:        $toDoPoints points  (100%)\n";
+            echo "Done:         $donePoints points  (100%)\n";
+            echo "In Progress:  $inProgressPoints points  (100%)\n";
+            echo "===============================\n";
+            echo "Done and In Progress: 0 points  (100%)\n";
+            echo "===============================\n\n";
+
         } catch (\Exception $e) {
             echo "\033[1;31mError: " . $e->getMessage() . "\033[0m\n";
         }
