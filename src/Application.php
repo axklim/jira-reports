@@ -122,8 +122,8 @@ class Application
             echo "To Do:        $toDoPoints points  (100%)\n";
             echo "Done:         $donePoints points  (100%)\n";
             echo "In Progress:  $inProgressPoints points  (100%)\n";
-            echo "===============================\n";
-            echo "Done and In Progress: 0 points  (100%)\n";
+            echo "-------------------------------\n";
+            echo "Done & In Progress: \n";
             echo "===============================\n\n";
 
         } catch (\Exception $e) {
