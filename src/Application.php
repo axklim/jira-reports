@@ -49,6 +49,7 @@ class Application
     {
         // Example: Get an epic from command line
         $epicKey = $_SERVER['argv'][1] ?? null;
+        $epicKey = $epicKey ?? $_ENV['JIRA_EPIC_KEY'] ?? null;
 
         if (!$epicKey) {
             echo "Usage: php run.php EPIC-KEY\n";
