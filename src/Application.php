@@ -117,11 +117,14 @@ class Application
         }
 
         // Summary Report
+        $toDoPercent =round($toDoPoints*100/$totalPoints);
+        $donePercent = round($donePoints*100/$totalPoints);
+        $inProgressPercent=round($inProgressPoints*100/$totalPoints);
         echo "\nTotal Story Points: $totalPoints\n";
         echo "===============================\n";
-        echo "To Do:        $toDoPoints points  (100%)\n";
-        echo "Done:         $donePoints points  (100%)\n";
-        echo "In Progress:  $inProgressPoints points  (100%)\n";
+        echo "To Do:        $toDoPoints points  ($toDoPercent%)\n";
+        echo "Done:         $donePoints points  ($donePercent%)\n";
+        echo "In Progress:  $inProgressPoints points  ($inProgressPercent%)\n";
         echo "-------------------------------\n";
         echo "Done & In Progress: \n";
         echo "===============================\n\n";
